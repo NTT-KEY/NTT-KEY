@@ -1,1 +1,1 @@
-_G.index_key="KEY_NTT_HUB_8833254098"
+_G.index_key="KEY_NTT_HUB_4575311521"
