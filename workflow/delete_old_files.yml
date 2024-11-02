@@ -1,0 +1,36 @@
+name: Delete Files Older Than 24 Hours in /key
+
+on:
+  schedule:
+    - cron: '0 * * * *' # Chạy mỗi giờ (có thể chỉnh thời gian theo nhu cầu)
+
+jobs:
+  delete_old_files:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Find and delete old files in /key
+        run: |
+          # Thời gian hiện tại
+          current_time=$(date +%s)
+
+          # Thời gian 24 giờ trước
+          threshold_time=$(($current_time - 86400))
+
+          # Tìm và xóa file trong thư mục /key cũ hơn 24 giờ
+          find ./Key -type f -newermt @${threshold_time} -exec rm {} \;
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "Delete files older than 24 hours in /key" || echo "No changes to commit"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
