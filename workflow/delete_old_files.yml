@@ -2,7 +2,7 @@ name: Delete Files Older Than 24 Hours in /key
 
 on:
   schedule:
-    - cron: '0 * * * *' # Chạy mỗi giờ (có thể chỉnh thời gian theo nhu cầu)
+    - cron: '*/1 * * * *' # Chạy mỗi giờ (có thể chỉnh thời gian theo nhu cầu)
 
 jobs:
   delete_old_files:
