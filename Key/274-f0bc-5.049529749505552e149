@@ -1,0 +1,3 @@
+if  os.time() >=1747152275 and os.time()<=1747238675 then
+_G.index_key="KEY_7367323649"
+end
