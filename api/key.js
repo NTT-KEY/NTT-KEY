@@ -10,11 +10,14 @@ export default async function handler(req, res) {
     }
 
     const fakePath = join(process.cwd(), "Key", `${file}`);
-        try {
-            const content = readFileSync(fakePath, "utf8");
-            res.setHeader("Content-Type", "text/plain");
-            return res.send(content);
-        } catch {
-            return res.end();
-        }
+    try {
+      const content = readFileSync(fakePath, "utf8");
+      res.setHeader("Content-Type", "text/plain");
+      return res.send(content);
+    } catch (err) {
+      return res.status(404).json({ error: "Không tìm thấy file" });
+    }
+  } catch (err) {
+    return res.status(500).json({ error: "Lỗi server" });
+  }
 }
