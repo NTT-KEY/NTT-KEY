@@ -4,7 +4,7 @@ const fs = require('fs');
 const app = express();
 const port = 3000;
 
-app.get('/key', (req, res) => {
+app.get('/Key', (req, res) => {
   const filePath = req.query.file;
 
   if (!filePath) {
