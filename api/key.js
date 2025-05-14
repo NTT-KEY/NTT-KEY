@@ -1,3 +1,6 @@
+import { readFileSync } from "fs";
+import { join } from "path";
+
 export default async function handler(req, res) {
   try {
     const file = req.query.file;
@@ -6,19 +9,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'Thiếu tham số ?file=' });
     }
 
-    // Lưu ý: KHÔNG có "refs/heads" trong URL raw GitHub
-    const url = `https://raw.githubusercontent.com/NTT-KEY/NTT-KEY/main/Key/${file}`;
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-      return res.status(404).json({ error: 'Không tìm thấy file' });
-    }
-
-    const text = await response.text();
-        res.setHeader("Content-Type", "text/plain");
-        res.send(text);
-  } catch (err) {
-    res.status(500).json({ error: 'Lỗi server', message: err.message });
-  }
+    const fakePath = join(process.cwd(), "Key", `${file}`);
+        try {
+            const content = readFileSync(fakePath, "utf8");
+            res.setHeader("Content-Type", "text/plain");
+            return res.send(content);
+        } catch {
+            return res.end();
+        }
 }
