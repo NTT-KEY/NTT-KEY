@@ -1,0 +1,4 @@
+if  os.time() >=1751780420 and os.time()<=1751866820 then
+_G.index_key="KEY_9074787528"
+_G.starus=true
+end
