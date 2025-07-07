@@ -1,4 +1,0 @@
-if  os.time() >=1751825868 and os.time()<=1751912268 then
-_G.index_key="KEY_8540254748"
-_G.starus=true
-end
