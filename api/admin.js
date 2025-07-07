@@ -2,7 +2,7 @@ export default async function handler(req, res) {
   const file = req.query.file;
   if (!file) return res.status(400).send("-- Thiếu file");
 
-  const apiUrl = `https://raw.githubusercontent.com/NTT-KEY/NTT-KEY/main/Key/${file}`;
+  const apiUrl = `/Key/${file}`;
 
   try {
     const githubRes = await fetch(apiUrl);
