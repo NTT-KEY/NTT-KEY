@@ -15,7 +15,7 @@ export default async function handler(req, res) {
       return res.status(400).send("-- Thiếu nội dung JSON");
     }
 
-    const lua = `if os.time() >= ${time1} and os.time() <= ${time2} then\n  _G.index_key = "${key}"\nend`;
+    const lua = `if os.time() >= ${time1} and os.time() <= ${time2} then \n  _G.index_key = "${key}" \n else \n _G.expired=true \n end`;
 
     res.setHeader("Content-Type", "text/plain");
     res.status(200).send(lua);
